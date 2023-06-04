@@ -5,7 +5,6 @@ console.log(galleryItems);
 
 const imageListEl = document.querySelector('.gallery');
 
-
 const createGalleryEl = ({
     preview,
     description,
@@ -21,11 +20,8 @@ const createGalleryEl = ({
  </a>
  </li>`;
  
-console.log(createGalleryEl)
-
 const galleryCardsList = galleryItems.map((el) => createGalleryEl(el))
-    
-console.log(...galleryCardsList)
+
 imageListEl.insertAdjacentHTML("afterbegin", galleryCardsList.join(""))
 
 imageListEl.addEventListener('click', openImage)
@@ -36,11 +32,18 @@ function openImage(event) {
         return
     }
 const imageLink = event.target.getAttribute('data-source');
-const instance = basicLightbox.create(`
-    <img src="${imageLink}" width="800" height="600">
-`)
+const instance = basicLightbox.create
+(`<img src="${imageLink}" width="800" height="600">`)
 
 instance.show()
-
+function closeByEsc(event) {
+    if (event.key === "Escape") {
+        instance.close();
+    window.removeEventListener('keydown', closeByEsc);
+    }
 }
+window.addEventListener('keydown', closeByEsc);
+};
+
+
 

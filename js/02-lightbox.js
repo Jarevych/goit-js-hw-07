@@ -5,7 +5,6 @@ console.log(galleryItems);
 
 const imageListEl = document.querySelector('.gallery');
 
-
 const createGalleryEl = ({
     preview,
     description,
@@ -16,14 +15,17 @@ const createGalleryEl = ({
  <img 
  class="gallery__image"
  src="${preview}" 
- data-source="${original}"
- alt="${description}">
+  alt="${description}">
  </a>
  </li>`;
- 
-console.log(createGalleryEl)
 
 const galleryCardsList = galleryItems.map((el) => createGalleryEl(el))
     
-console.log(...galleryCardsList)
 imageListEl.insertAdjacentHTML("afterbegin", galleryCardsList.join(""))
+
+var lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: "alt",
+    captionDelay: 250,
+    aptionPosition: "bottom",
+});
+ 
